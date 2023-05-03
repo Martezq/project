@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
+{% endblock %}
 {% block content %}
-<h1>Forum Main Page</h1>
-<h2>Forum Rules</h2>
-<p> <!-- Add forum rules here --> </p>
+    <h1>Forum Main Page</h1>
+    <h2>Forum Rules</h2>
+    <p> <!-- Add forum rules here --> </p>
 
-<h2>Topics</h2>
-<div class="topics">
-    {% for topic in topics %}
-        <div class="topic">
-            <h3>{{ topic.title }}</h3>
-            <p>{{ topic.description }}</p>
-            {% if topic.latest_post %}
-                <p>Latest post: {{topic.latest_post.O.title}}</p>
-            {% else %}
-            <p>No posts yet.</p>
-            {% endif %}
-            <a href="{% url 'forum:post_list' topic.id %}">View all posts in this topic</a>
-        </div>
-    {% endfor %}
-</div>
+    <h2>Topics</h2>
+    <div class="topics">
+        {% for topic in topics %}
+            <div class="post">
+                <h3>{{ topic.title }}</h3>
+                <p>{{ topic.description }}</p>
+                {% if topic.id in latest_posts %}
+                    <p class="post-metadata">Latest post: {{ latest_posts[topic.id].title }}</p>
+                {% else %}
+                    <p class="post-metadata">No posts yet.</p>
+                {% endif %}
+                <a href="{% url 'forum:post_list' topic.id %}" class="post-action create">View all posts in this topic</a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

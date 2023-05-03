@@ -11,16 +11,18 @@ from django.db.models import Prefetch
 
 
 def forum_main(request):
-    topics = Topic.objects.prefetch_related(
-        Prefetch(
-            'post_set',
-            queryset=Post.objects.order_by('-created_at')[:1],
-            to_attr='latest_post'
-        )
-    )
+    print("Entering forum_main view")
+    topics = Topic.objects.all()
+    latest_posts = {'dsda':'miau'}
 
+    for topic in topics:
+        latest_post = Post.objects.filter(topic=topic).order_by('-created_at').first()
+        print(f"Topic: {topic}, Latest post: {latest_post}")
+        latest_posts[topic.id] = latest_post
+    print(latest_post)
     context = {
         'topics': topics,
+        'latest_posts': latest_posts,
     }
     return render(request, 'forum/forum_main.html', context)
 
