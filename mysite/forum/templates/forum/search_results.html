@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Search Results</h1>
+<p>Results for "{{ request.GET.q }}":</p>
+
+<h2>Topics</h2>
+<div class="topics">
+    {% for topic in topics %}
+        <!-- Display topic details -->
+    {% endfor %}
+</div>
+
+<h2>Posts</h2>
+<div class="posts">
+    {% for post in posts %}
+        <!-- Display post details -->
+    {% endfor %}
+</div>
+
+{% endblock %}

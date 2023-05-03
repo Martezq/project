@@ -7,24 +7,47 @@ from .models import Post, Comment, Topic
 from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import Prefetch
+from django.db.models import Q
 
+
+
+def search(request):
+    query = request.GET.get('q', '')
+    if query:
+        topics = Topic.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+
+        posts = Post.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+
+    else:
+        topics = Topic.objects.all()
+        posts = Post.objects.all()
+
+
+    context = {
+        'topics': topics,
+        'posts': posts,
+    }
+    print(context)
+    return render(request, 'forum/search_results.html', context)
 
 def forum_main(request):
-    print("Entering forum_main view")
     topics = Topic.objects.all()
-    latest_posts = {'dsda':'miau'}
+    topics_and_latest_posts = []
 
     for topic in topics:
         latest_post = Post.objects.filter(topic=topic).order_by('-created_at').first()
-        print(f"Topic: {topic}, Latest post: {latest_post}")
-        latest_posts[topic.id] = latest_post
-    print(latest_post)
+        topics_and_latest_posts.append((topic, latest_post))
+
     context = {
-        'topics': topics,
-        'latest_posts': latest_posts,
+        'topics_and_latest_posts': topics_and_latest_posts,
     }
     return render(request, 'forum/forum_main.html', context)
+
+
 
 
 def post_list(request, topic_id):
