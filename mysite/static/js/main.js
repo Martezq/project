@@ -1,5 +1,5 @@
 //// Replace YOUR_API_KEY with your actual OpenWeatherMap API key
-//const weatherAPIKey = "b75be46540a1bf38dba11e9c39a5427b";
+//const weatherAPIKey = "";
 //const weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${weatherAPIKey}`;
 //
 //async function fetchWeather(lat, lon) {
