@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django App{% endblock %}</title>
+    {% load static %}
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <script src="{% static 'js/weather.js' %}" defer></script>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'profile:profile' %}">Profile</a></li>
+                <li><a href="{% url 'forum:forum_main' %}">Forum</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'notes:note_list' %}">Notes</a></li>
+                <li>
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link">Logout</button>
+                    </form>
+                </li>
+                {% else %}
+                <li><a href="{% url 'notes:note_list' %}">Notes</a></li>
+                <li><a href="{% url 'account_login' %}">Login</a></li>
+                <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+                {% endif %}
+                <li> <h1>Weather</h1><div id="weatherDisplay"></div>>></li>
+            </ul>
+        </nav>
+        <div class="profile">
+            {% if user.is_authenticated %}
+            <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+            {% else %}
+            <img src="{% static 'img/guest.png' %}" alt="Guest Picture">
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

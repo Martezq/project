@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
+{% endblock %}
+{% block title %}Post List{% endblock %}
+
+{% block content %}
+    <h1>Post List</h1>
+    <a href="{% url 'forum:post_create' topic_id %}" class="post-action create">Create a new post</a>
+    <div class="post-list">
+        {% for post in posts %}
+            <div class="post">
+                <h2><a href="{% url 'forum:post_detail' post.id %}">{{ post.title }}</a></h2>
+                <p>{{ post.content }}</p>
+                <p>Author: {{ post.user }} | {{ post.created_at|date:"F d, Y" }}</p>
+                <p>Comments: {{ post.comments.count }}</p>
+                {% if user.is_authenticated %}
+                <div class="post-actions">
+                    <a href="{% url 'forum:post_edit' post.id %}" class="post-action edit">Edit</a>
+                    <a href="{% url 'forum:post_delete' post.id %}" class="post-action delete">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if posts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+            </span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">next</a>
+                <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
+

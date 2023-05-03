@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Create Note</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+{% endblock %}

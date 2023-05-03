@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Log In</h2>
+    <form method="post" action="{% url 'account_login' %}?next={{ request.GET.next|urlencode }}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-purple">Log In</button>
+    </form>
+</div>
+{% endblock %}

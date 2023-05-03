@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">
+{% endblock %}
+{% block content %}
+    <h2 class="">Your Notes</h2>
+    <a href="{% url 'notes:note_create' %}" class="note-action create">Create a new note</a>
+    <div class="notes-grid">
+        {% for note in notes %}
+            <div class="note-container {{ note.color }}">
+                <div class="note-actions">
+                    <a href="{% url 'notes:note_update' note.id %}" class="note-action edit">Edit</a>
+                    <a href="{% url 'notes:note_delete' note.id %}" class="note-action delete">Delete</a>
+                </div>
+                <h3>{{ note.title }}</h3>
+                <p>{{ note.content }}</p>
+                {% if note.reminder %}
+                    <div class="reminder-date">{{ note.reminder.remind_at|date:"F d, Y H:i" }}</div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>You have no notes.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

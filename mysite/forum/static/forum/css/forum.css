@@ -1,0 +1,90 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.post, .comment {
+    max-width: 90%; /* Limit the width */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.post p {
+    margin-bottom: 1em;
+}
+
+.post-metadata {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 1em;
+}
+
+.comment-metadata {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 1em;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.post-action {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.post-action.create {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.post-action.edit {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.post-action.delete {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+/* ... existing CSS ... */
+
+h3 {
+    color: #333;
+    margin-left: 5%;
+    margin-bottom: 1em;
+}
+
+form.comment-form {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+}
