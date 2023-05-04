@@ -4,23 +4,46 @@
 <link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
 {% endblock %}
 {% block content %}
+<form method="get" action="{% url 'forum:search' %}">
+    <input type="text" name="q" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
     <h1>Forum Main Page</h1>
     <h2>Forum Rules</h2>
-    <p> <!-- Add forum rules here --> </p>
+    <div class="forum-rules-container">
+    <button class="forum-rules-toggle">Toggle Forum Rules</button>
+    <div class="forum-rules" style="display: none;">
+        <ol>
+           <li>Be respectful to other members.</li>
+    <li>No offensive language, hate speech, or personal attacks.</li>
+    <li>Keep discussions relevant to the specific topic or forum.</li>
+    <li>No spamming or advertising.</li>
+    <li>Do not share personal information about yourself or others.</li>
+    <li>Do not post copyrighted material without proper attribution.</li>
+    <li>Follow the guidelines for each specific forum or topic.</li>
+    <li>Violation of these rules may result in warnings, temporary suspensions,
+        or permanent bans, depending on the severity of the offense.</li>
+        </ol>
+    </div>
+</div>
 
     <h2>Topics</h2>
     <div class="topics">
-        {% for topic in topics %}
+        {% for topic, latest_post in topics_and_latest_posts %}
             <div class="post">
                 <h3>{{ topic.title }}</h3>
                 <p>{{ topic.description }}</p>
-                {% if topic.id in latest_posts %}
-                    <p class="post-metadata">Latest post: {{ latest_posts[topic.id].title }}</p>
+                {% if latest_post %}
+                    <p class="post-metadata">Latest post: {{ latest_post.title }}</p>
                 {% else %}
                     <p class="post-metadata">No posts yet.</p>
                 {% endif %}
                 <a href="{% url 'forum:post_list' topic.id %}" class="post-action create">View all posts in this topic</a>
             </div>
         {% endfor %}
+
     </div>
+{% block extra_js %}
+<script src="{% static 'forum/js/forum.js' %}"></script>
+{% endblock %}
 {% endblock %}

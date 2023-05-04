@@ -8,6 +8,8 @@ class Topic(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # def latest_post(self):
+    #     return self.post_set.order_by('-created_at').first()
     def __str__(self):
         return self.title
 

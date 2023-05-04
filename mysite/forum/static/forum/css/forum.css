@@ -88,3 +88,27 @@ form.comment-form {
     border-radius: 5px;
     padding: 15px;
 }
+
+.forum-rules-container {
+    margin-bottom: 1rem;
+}
+
+.forum-rules-toggle {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.forum-rules {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+    border-radius: 4px;
+}
