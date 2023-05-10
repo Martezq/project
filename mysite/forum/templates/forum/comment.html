@@ -1,0 +1,21 @@
+<div class="comment{% if comment.parent_comment %} reply{% endif %}">
+    {% for reply in comment.replies.all %}
+        <div class="reply">
+            {% include 'forum/comment.html' with comment=reply is_quoted=True %}
+        </div>
+    {% endfor %}
+    <strong>{{ comment.user }}</strong> - <span class="comment-metadata">{{ comment.created_at|date:"F d, Y H:i" }}</span>
+    <p>{{ comment.content }}</p>
+    {% if not is_quoted %}
+        {% if request.user == comment.user %}
+            <div class="comment-actions">
+                <a href="{% url 'forum:comment_update' comment.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                <a href="{% url 'forum:comment_delete' comment.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+        {% elif user.is_authenticated %}
+            <div class="comment-actions">
+                <a href="{% url 'forum:comment_reply' post.id comment.id %}" class="btn btn-sm btn-info">Reply</a>
+            </div>
+        {% endif %}
+    {% endif %}    
+</div>

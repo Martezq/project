@@ -21,6 +21,10 @@ def note_create(request):
             remind_at =form.cleaned_data['remind_at']
             email_notification = form.cleaned_data['email_notification']
             if remind_at:
+                user_intervals = request.user.reminder_intervals.get(note.color)
+                remind_before = user_intervals.get('remind_before', 0)
+                actual_remind_at = remind_at - timezone.timedelta(minutes=remind_before)
+
                 reminder, created = Reminder.objects.get_or_create(
                     note=note,
                     defaults={

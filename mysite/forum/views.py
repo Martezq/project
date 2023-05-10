@@ -160,7 +160,7 @@ def create_comment(request, post_id, parent_comment_id=None):
     return render(request, 'forum/comment_create.html', context)
 
 
-class PostDetailView(DetailView, UserPassesTestMixin):
+class PostDetailView(DetailView):
     model = Post
 
     def get_context_data(self, **kwargs):

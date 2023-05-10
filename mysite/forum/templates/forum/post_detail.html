@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
 {% endblock %}
 {% block content %}
+<div class="forum-background">
     <div class="post">
         <h2>{{ post.title }}</h2>
         <p>{{ post.content }}</p>
@@ -20,25 +21,12 @@
 
     <h3>Comments:</h3>
     {% for comment in comments %}
-        <div class="comment">
-            <strong>{{ comment.user }}</strong> - <span class="comment-metadata">{{ comment.created_at|date:"F d, Y H:i" }}</span>
-            <p>{{ comment.content }}</p>
-            {% if request.user == comment.user %}
-                <div class="comment-actions">
-                    <a href="{% url 'forum:comment_update' comment.pk %}" class="btn btn-sm btn-secondary">Edit</a>
-                    <a href="{% url 'forum:comment_delete' comment.pk %}" class="btn btn-sm btn-danger">Delete</a>
-                    <a href="{% url 'forum:comment_reply' post.id comment.id %}" class="btn btn-sm btn-info">Reply</a>
-                </div>
-            {% endif %}
-             {% if comment.parent_comment %}
-        <blockquote>
-            <strong>{{ comment.parent_comment.user }}</strong>: {{ comment.parent_comment.content }}
-        </blockquote>
+    {% if not comment.parent_comment %}
+        {% include 'forum/comment.html' with comment=comment %}
     {% endif %}
-        </div>
-    {% empty %}
-        <p>No comments yet.</p>
-    {% endfor %}
+{% empty %}
+    <p>No comments yet.</p>
+{% endfor %}
 
 {% if user.is_authenticated %}
     <h3>Add a comment:</h3>
@@ -50,4 +38,5 @@
 {% else %}
     <h3><a href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Log in</a> to leave a comment</h3>
 {% endif %}
+</div>
 {% endblock %}

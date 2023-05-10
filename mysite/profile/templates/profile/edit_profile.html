@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
   <h2>Edit Profile</h2>
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form|crispy }}
+    {{ profile_form|crispy }}
+
+    <h3>Reminder Settings</h3>
+    {{ reminder_settings_formset.management_form }}
+    {% for form in reminder_settings_formset %}
+      {{ form.color.label_tag }} {{ form.color }}
+      {{ form.repeat.label_tag }} {{ form.repeat }}
+      {{ form.remind_before.label_tag }} {{ form.remind_before }}<br>
+    {% endfor %}
+
     <button type="submit" class="btn btn-primary">Save</button>
   </form>
 {% endblock %}

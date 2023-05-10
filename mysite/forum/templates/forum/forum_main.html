@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
 {% endblock %}
 {% block content %}
+<div class="forum-background">
 <form method="get" action="{% url 'forum:search' %}">
     <input type="text" name="q" placeholder="Search...">
     <button type="submit">Search</button>
@@ -46,4 +47,5 @@
 {% block extra_js %}
 <script src="{% static 'forum/js/forum.js' %}"></script>
 {% endblock %}
+</div>
 {% endblock %}

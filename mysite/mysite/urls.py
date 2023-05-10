@@ -23,9 +23,9 @@ from django.conf import settings
 urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('admin/', admin.site.urls),
-    path('profile/', include('profile.urls')),
-    path('forum/', include('forum.urls')),
-    path('notes/', include('notes.urls')),
+    path('profile/', include('profile.urls', namespace='profile')),
+    path('forum/', include('forum.urls', namespace='forum')),
+    path('notes/', include('notes.urls', namespace='notes')),
     path('accounts/', include('allauth.urls')),
 ]
 

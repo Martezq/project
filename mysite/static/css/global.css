@@ -7,8 +7,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: orange;
-    height: 400px;
+    background-color: #4CAF50;
+    height: 200px;
+    padding: 0 20px;
 }
 
 nav ul {
@@ -24,27 +25,23 @@ nav li {
 
 nav a {
     text-decoration: none;
-    color: blue;
+    color: white;
 }
 
 nav a:hover {
-    color: darkblue;
+    color: #f8f9fa;
+}
+
+.main-nav {
+    margin-right: auto;
+}
+
+.auth-nav {
+    margin-left: 20px;
 }
 
 .profile img {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+   
 }
-
-.btn-link {
-    background: none;
-    border: none;
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: inherit;
-}
-
-
-
