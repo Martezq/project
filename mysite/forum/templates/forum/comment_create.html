@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
 {% endblock %}
 {% block content %}
+<div class="forum-background">
 <div class="container">
     <h2>{{ form_title }}</h2>
     <form method="post">
@@ -12,5 +13,6 @@
         {{ form|crispy }}
         <button type="submit" class="btn btn-primary">{{ form_submit_text }}</button>
     </form>
+</div>
 </div>
 {% endblock %}
