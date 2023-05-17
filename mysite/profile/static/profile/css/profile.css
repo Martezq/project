@@ -1,0 +1,48 @@
+.profile-container {
+    width: 60%;
+    margin: 0 auto;
+    position: relative;  
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+.reminder-settings {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .reminder-settings div {
+    flex: 1 1 30%;  
+    margin-bottom: 10px;
+  }
+  
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin: 20px auto;
+}
+
+.profile-image img {
+    width: 100%;
+    height: auto;
+}
+
+.reminder-settings-table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.reminder-settings-table th, .reminder-settings-table td {
+    padding: 10px;
+    text-align: center;
+}
+
+.edit-profile-link {
+    margin-top: 10px;
+    text-align: left;
+}

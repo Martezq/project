@@ -14,6 +14,6 @@ class UserProfileForm(forms.ModelForm):
 class ReminderSettingsForm(forms.Form):
     color = forms.ChoiceField(choices=Note.COLOR_CHOICES, label='Color')
     repeat = forms.ChoiceField(choices=Reminder.REPEAT_CHOICES, initial='none', label='Repeat')
-    remind_before = forms.IntegerField(initial=0, label='Remind Before (minutes)')
+    remind_before = forms.IntegerField(initial=0, label='Remind Before (minutes)', required=False)
 
 ReminderSettingsFormSet = forms.formset_factory(ReminderSettingsForm, extra=1, max_num=len(Note.COLOR_CHOICES))

@@ -6,7 +6,7 @@
 <div class="container note-center">
     <h2>Confirm Delete</h2>
     <p>Are you sure you want to delete the note "{{ note.title }}"?</p>
-    <form method="POST">
+    <form method="POST" class="form-style">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Delete</button>
         <a href="{% url 'notes:note_list' %}" class="btn btn-secondary">Cancel</a>

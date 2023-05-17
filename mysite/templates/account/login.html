@@ -4,10 +4,11 @@
 {% block content %}
 <div class="container">
     <h2 class="text-center">Log In</h2>
-    <form method="post" action="{% url 'account_login' %}?next={{ request.GET.next|urlencode }}">
+    <form method="post" action="{% url 'account_login' %}?next={{ request.GET.next|urlencode }}" class="form-style">
         {% csrf_token %}
-        {{ form|crispy }}
+        {{ form.as_p }}
         <button type="submit" class="btn btn-purple">Log In</button>
     </form>
+    <p><a href="{% url 'account_reset_password' %}">Forgot password?</a></p>
 </div>
 {% endblock %}

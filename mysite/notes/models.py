@@ -18,7 +18,7 @@ class Note(models.Model):
 class Reminder(models.Model):
 
     REPEAT_CHOICES = [
-        ('none', 'None'),
+        ('none', 'Not set'),
         ('daily', 'Daily'),
         ('weekly', 'Weekly'),
         ('monthly', 'Monthly'),

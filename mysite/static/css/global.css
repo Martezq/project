@@ -45,3 +45,14 @@ nav a:hover {
     height: 60px;
    
 }
+
+.form-style {
+    border: 1px solid black;
+    border-radius: 10px;  /* Rounded border */
+    max-width: 90%;  /* Maximum width of 90% */
+    margin: auto;  /* Center the form on the page */
+    background: linear-gradient(to bottom, #f0f0f0, #b3b3b3);  /* Light grey to dark grey background */
+    padding: 20px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+  }
+  

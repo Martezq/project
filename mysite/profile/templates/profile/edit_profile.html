@@ -1,19 +1,38 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">{% endblock %}
 {% block content %}
+
+<div class="profile-container">
   <h2>Edit Profile</h2>
-  <form method="POST" enctype="multipart/form-data">
+  <form method="POST" enctype="multipart/form-data" class="form-style">
     {% csrf_token %}
-    {{ profile_form|crispy }}
+    {{ profile_form }}
 
     <h3>Reminder Settings</h3>
     {{ reminder_settings_formset.management_form }}
-    {% for form in reminder_settings_formset %}
-      {{ form.color.label_tag }} {{ form.color }}
-      {{ form.repeat.label_tag }} {{ form.repeat }}
-      {{ form.remind_before.label_tag }} {{ form.remind_before }}<br>
-    {% endfor %}
+    <div class="reminder-settings">
+      {% for form in reminder_settings_formset %}
+        <div>
+          {{ form.color.label_tag }} 
+          {{ form.color }}
+        </div>
+        <div>
+          {{ form.repeat.label_tag }} 
+          {{ form.repeat }}
+        </div>
+        <div>
+          {{ form.remind_before.label_tag }} 
+          {{ form.remind_before }}
+        </div>
+      {% endfor %}
+    </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <div class="submit-button">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
   </form>
+</div>
 {% endblock %}
