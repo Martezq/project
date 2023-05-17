@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">
+{% endblock %}
 {% block content %}
+
+<div class="profile-container">
   <h2>{{ user.username }}'s Profile</h2>
-  <img src="{{ user.userprofile.image.url }}" alt="{{ user.username }}'s profile picture" class="rounded-circle">
-  <br>
-  <a href="{% url 'profile:edit_profile' %}">Edit Profile</a>
+  <div class="profile-image">
+    <img src="{{ user.userprofile.image.url }}" alt="{{ user.username }}'s profile picture" class="rounded-circle">
+  </div>
 
   <h3>Reminder Settings</h3>
-  <table>
+  <table class="reminder-settings-table">
     <tr>
       <th>Color</th>
       <th>Repeat</th>
@@ -16,9 +21,13 @@
     {% for color, settings in reminder_settings.items %}
       <tr>
         <td>{{ color }}</td>
-        <td>{{ settings.repeat }}</td>
-        <td>{{ settings.remind_before }}</td>
+        <td>{{ settings.repeat|default:"Not set" }}</td>
+        <td>{{ settings.remind_before|default:"Not set" }}</td>
       </tr>
     {% endfor %}
   </table>
+  <div class="edit-profile-link">
+    <a href="{% url 'profile:edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+  </div>
+</div>
 {% endblock %}

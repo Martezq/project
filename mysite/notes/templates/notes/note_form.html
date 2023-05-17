@@ -7,9 +7,9 @@
 {% block content %}
 <div class="container">
     <h2>{{ form_title }}</h2>
-    <form method="post">
+    <form method="post" class="form-style">
         {% csrf_token %}
-        {{ form|crispy }}
+        {{ form.as_p }}
         <button type="submit" class="btn btn-primary">{{ form_submit_text }}</button>
     </form>
 </div>

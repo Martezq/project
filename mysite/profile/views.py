@@ -31,7 +31,7 @@ def edit_profile(request):
 
         if profile_form.is_valid() and reminder_settings_formset.is_valid() and reminder_settings_formset.management_form.is_valid():
             profile_form.save()
-
+            
 
             reminder_intervals = user.reminder_intervals
             for form in reminder_settings_formset:
@@ -46,7 +46,9 @@ def edit_profile(request):
             user.save()
 
             return redirect('profile:profile')
-
+        else:
+            print(profile_form.errors)
+            print(reminder_settings_formset.errors)
     else:
         profile_form = UserProfileForm(instance=user.userprofile)
         reminder_settings_initial = []
