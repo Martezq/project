@@ -1,7 +1,7 @@
-.container {
+/* .container {
     max-width: 800px;
     margin: 0 auto;
-}
+} */
 
 .post-list {
     display: flex;
@@ -63,13 +63,19 @@
     border: none;
     border-radius: 5px;
     text-decoration: none;
-    margin-left: 5%;
-    margin-bottom: 1rem
+    min-width: 5rem;
+    text-align: center;
 }
 
 .post-action.create {
+    max-width: 90%;
     background-color: #007bff;
-    color: #fff;
+    color: white;
+    display: block;
+    font-size: 1.2rem;
+    padding: 0.6rem 1.2rem;
+    margin: 1rem auto;
+    align-content: center;
 }
 
 .post-action.edit {
@@ -85,7 +91,7 @@
 .pagination {
     margin-top: 20px;
 }
-/* ... existing CSS ... */
+
 
 h3 {
     color: #333;
@@ -93,7 +99,7 @@ h3 {
     margin-bottom: 1em;
 }
 
-form.comment-form {
+.comment-form {
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
@@ -129,9 +135,9 @@ form.comment-form {
 
 .forum-background {
     background-color: #f0f0f0;
-    padding: 2rem; /* Replace the fixed pixel value with relative units (1rem is equal to the font-size of the root element, usually 16px) */
-    margin: 2rem auto; /* Replace the fixed pixel value with relative units */
-    max-width: 80%; /* Use a percentage value instead of a fixed pixel value */
+    padding: 2rem; 
+    margin: 2rem auto; 
+    max-width: 80%; 
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

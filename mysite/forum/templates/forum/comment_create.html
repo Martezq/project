@@ -6,13 +6,15 @@
 {% endblock %}
 {% block content %}
 <div class="forum-background">
-<div class="container">
-    <h2>{{ form_title }}</h2>
-    <form method="post"  class="form-style">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">{{ form_submit_text }}</button>
-    </form>
+<div class="form-container">
+    <h2>Leave a comment</h2>
+    <div class="form-style">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+    </div>
 </div>
 </div>
 {% endblock %}

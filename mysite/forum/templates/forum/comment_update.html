@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="forum-background">
-    <h2>Edit Comment</h2>
-    <form method="post" class="form-style">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+    <div class="form-container">
+        <h2>Edit Comment</h2>
+        <div class="form-style">
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
