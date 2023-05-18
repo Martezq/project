@@ -7,32 +7,32 @@
 
 <div class="profile-container">
   <h2>Edit Profile</h2>
-  <form method="POST" enctype="multipart/form-data" class="form-style">
-    {% csrf_token %}
-    {{ profile_form }}
-
-    <h3>Reminder Settings</h3>
-    {{ reminder_settings_formset.management_form }}
-    <div class="reminder-settings">
-      {% for form in reminder_settings_formset %}
-        <div>
-          {{ form.color.label_tag }} 
-          {{ form.color }}
-        </div>
-        <div>
-          {{ form.repeat.label_tag }} 
-          {{ form.repeat }}
-        </div>
-        <div>
-          {{ form.remind_before.label_tag }} 
-          {{ form.remind_before }}
-        </div>
-      {% endfor %}
-    </div>
-
-    <div class="submit-button">
-      <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-  </form>
+  <div class="form-style">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ profile_form }}
+      <h3>Reminder Settings</h3>
+      {{ reminder_settings_formset.management_form }}
+      <div class="reminder-settings">
+        {% for form in reminder_settings_formset %}
+          <div>
+            {{ form.color.label_tag }}
+            {{ form.color }}
+          </div>
+          <div>
+            {{ form.repeat.label_tag }}
+            {{ form.repeat }}
+          </div>
+          <div>
+            {{ form.remind_before.label_tag }}
+            {{ form.remind_before }}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="submit-button">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}

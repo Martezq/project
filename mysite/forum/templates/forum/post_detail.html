@@ -30,11 +30,13 @@
 
 {% if user.is_authenticated %}
     <h3>Add a comment:</h3>
-    <form method="post" action="{% url 'forum:comment_create' post.id %}" class="comment-form">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-primary">Comment</button>
-    </form>
+    <div class="comment-form">
+        <form method="post" action="{% url 'forum:comment_create' post.id %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+    </div>
 {% else %}
     <h3><a href="{% url 'account_login' %}?next={{ request.path|urlencode }}">Log in</a> to leave a comment</h3>
 {% endif %}

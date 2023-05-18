@@ -6,10 +6,12 @@
     <h2>Delete Note</h2>
     <p>Are you sure you want to delete this note?</p>
     <p>Title: {{ note.title }}</p>
-    <form method="post" class="form-style">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a href="{% url 'notes:note_list' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+    <div class="form-style">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url 'notes:note_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
 </div>
 {% endblock %}
