@@ -19,6 +19,7 @@ from django.urls import path, include
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
+from .weather import WeatherDataView
 
 urlpatterns = [
     path('', views.homepage, name='homepage'),
@@ -27,6 +28,8 @@ urlpatterns = [
     path('forum/', include('forum.urls', namespace='forum')),
     path('notes/', include('notes.urls', namespace='notes')),
     path('accounts/', include('allauth.urls')),
+    path('api/weather-data/', WeatherDataView.as_view(), name='weather_data'),
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

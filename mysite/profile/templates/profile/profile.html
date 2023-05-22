@@ -6,12 +6,15 @@
 {% block content %}
 
 <div class="profile-container">
-  <h2>{{ user.username }}'s Profile</h2>
-  <div class="profile-image">
-    <img src="{{ user.userprofile.image.url }}" alt="{{ user.username }}'s profile picture" class="rounded-circle">
+  <div class="header">
+    <div class="profile-image">
+      <img src="{{ user.userprofile.image.url }}" alt="{{ user.username }}'s profile picture" class="rounded-circle">
+    </div>
+    <h2>{{ user.username }}'s Profile</h2>
   </div>
+  <hr>
 
-  <h3>Reminder Settings</h3>
+  <h3 class="text-center">Reminder Settings</h3>
   <table class="reminder-settings-table">
     <tr>
       <th>Color</th>

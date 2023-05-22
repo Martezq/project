@@ -179,3 +179,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_ADAPTER = 'profile.adapters.AccountAdapter'
 
 
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    # add the production site url if you have one
+]

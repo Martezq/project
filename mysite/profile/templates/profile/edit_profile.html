@@ -5,27 +5,26 @@
 <link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">{% endblock %}
 {% block content %}
 
-<div class="profile-container">
-  <h2>Edit Profile</h2>
+<div class="edit-container">
+  <h2 class="text-center">Edit Profile</h2>
   <div class="form-style">
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ profile_form }}
-      <h3>Reminder Settings</h3>
+      {{ profile_form.as_crispy_fields }}
+      <h3 class="text-center">Reminder Settings</h3>
       {{ reminder_settings_formset.management_form }}
       <div class="reminder-settings">
         {% for form in reminder_settings_formset %}
-          <div>
-            {{ form.color.label_tag }}
-            {{ form.color }}
-          </div>
-          <div>
-            {{ form.repeat.label_tag }}
-            {{ form.repeat }}
-          </div>
-          <div>
-            {{ form.remind_before.label_tag }}
-            {{ form.remind_before }}
+          <div class="form-row">
+            <div class="form-item">
+              {{ form.color|as_crispy_field }}
+            </div>
+            <div class="form-item">
+              {{ form.repeat|as_crispy_field }}
+            </div>
+            <div class="form-item">
+              {{ form.remind_before|as_crispy_field }}
+            </div>
           </div>
         {% endfor %}
       </div>
@@ -35,4 +34,5 @@
     </form>
   </div>
 </div>
+
 {% endblock %}
