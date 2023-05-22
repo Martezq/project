@@ -22,7 +22,6 @@
                 {% else %}
                 <li><a href="{% url 'notes:note_list' %}">Notes</a></li>
                 {% endif %}
-                <li> <h1>Weather</h1><div id="weatherDisplay"></div></li>
             </ul>
             <ul class="auth-nav">
                 {% if user.is_authenticated %}
@@ -45,6 +44,8 @@
             <img src="{% static 'img/guest.png' %}" alt="Guest Picture">
             {% endif %}
         </div>
+        <h1 class="city">Weather</h1>
+        <div id="weatherDisplay"></div>
     </header>
 
     <div class="content">

@@ -2,34 +2,45 @@
     width: 60%;
     margin: 0 auto;
     position: relative;  
+    border: 2px solid #b8b894;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #f0f0f0, #b3b3b3);
+    padding: 20px;
 }
 
-h2 {
-    margin-top: 20px;
+.edit-container {
+    width: 60%; 
+    margin: 0 auto;
+    align-items: center; 
 }
 
-.reminder-settings {
+.form-item {
+    flex: 1;
+    margin: 0 10px;
+    align-items: center;
+}
+
+.header {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-.reminder-settings div {
-    flex: 1 1 30%;  
-    margin-bottom: 10px;
-  }
-  
+    align-items: center;
+}
 
 .profile-image {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
-    margin: 20px auto;
+    border-radius: 50%;
+    margin-right: 20px;
 }
 
 .profile-image img {
     width: 100%;
     height: auto;
+}
+
+
+hr {
+    margin: 20px 0;
 }
 
 .reminder-settings-table {

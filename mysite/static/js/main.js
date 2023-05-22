@@ -1,27 +1,39 @@
-// Replace YOUR_API_KEY with your actual OpenWeatherMap API key
-const weatherAPIKey = "";
-const weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${weatherAPIKey}`;
+fetch('/api/weather-data/')
+  .then(response => response.json())
+  .then(data => {
+    const weatherDisplay = document.getElementById("weatherDisplay");
+  
+    const weatherDescription = document.createElement('div');
+    const capitalizedDescription = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1);
+    weatherDescription.textContent = `${capitalizedDescription}`;
+    weatherDisplay.appendChild(weatherDescription);
+  
+    const temperature = document.createElement('div');
+    const tempCelsius = data.main.temp - 273.15;
+    temperature.textContent = `Temperature: ${tempCelsius.toFixed(2)} °C`;
+    weatherDisplay.appendChild(temperature);
+  
+    const feelsLike = document.createElement('div');
+    const feelsLikeCelsius = data.main.feels_like - 273.15;
+    feelsLike.textContent = `Feels Like: ${feelsLikeCelsius.toFixed(2)} °C`;
+    weatherDisplay.appendChild(feelsLike);
+  
+    const humidity = document.createElement('div');
+    humidity.textContent = `Humidity: ${data.main.humidity}%`;
+    weatherDisplay.appendChild(humidity);
+  
+    const windSpeed = document.createElement('div');
+    windSpeed.textContent = `Wind Speed: ${data.wind.speed} m/s`;
+    weatherDisplay.appendChild(windSpeed);
+  
+    const windGust = document.createElement('div');
+    windGust.textContent = `Gust: ${data.wind.gust} m/s`;
+    weatherDisplay.appendChild(windGust);
+  
+    const icon = document.createElement('img');
+    icon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+    weatherDescription.appendChild(icon);
 
-async function fetchWeather(lat, lon) {
-   const response = await fetch(`${weatherAPIUrl}&lat=${lat}&lon=${lon}`);
-   const data = await response.json();
-   displayWeather(data);
-}
-
-function displayWeather(weatherData) {
-   // Display the weather data on your page
-       const weatherDisplay = document.getElementById("weatherDisplay");
-   weatherDisplay.textContent = JSON.stringify(weatherData, null, 2);
-}
-function getUserLocation() {
-   if (navigator.geolocation) {
-       navigator.geolocation.getCurrentPosition((position) => {
-           const { latitude, longitude } = position.coords;
-           fetchWeather(latitude, longitude);
-       });
-   } else {
-       alert("Geolocation is not supported by this browser.");
-   }
-}
-
-getUserLocation();
+    const cityName = data.name;
+    document.querySelector('.city').textContent = cityName;
+  });
