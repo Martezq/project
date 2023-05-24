@@ -29,6 +29,7 @@ urlpatterns = [
     path('notes/', include('notes.urls', namespace='notes')),
     path('accounts/', include('allauth.urls')),
     path('api/weather-data/', WeatherDataView.as_view(), name='weather_data'),
+    path('hiit/', include('hiit.urls',namespace='hiit'))
 
 ]
 

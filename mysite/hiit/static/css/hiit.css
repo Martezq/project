@@ -1,0 +1,34 @@
+.workout-timer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid black;
+    padding: 20px;
+    width: 500px;
+    height: 200px;
+    position: relative;
+}
+
+.workout-timer__current-interval {
+    font-size: 2em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.workout-timer__total-time {
+    position: absolute;
+    right: 20px;
+}
+
+.workout-timer__next-interval {
+    position: absolute;
+    left: 20px;
+}
+
+.workout-timer__controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}

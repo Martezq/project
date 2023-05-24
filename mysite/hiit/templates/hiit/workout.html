@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="workout-timer" data-warmup="{{ workout.warm_up_duration }}" data-highintensity="{{ workout.high_intensity_duration }}" 
+data-recovery="{{ workout.recovery_duration }}" data-intervals="{{ workout.number_of_intervals }}">
+    <div class="workout-timer__current-interval">
+        <span id="currentIntervalTimer">00:00</span>
+    </div>
+    <div class="workout-timer__total-time">
+        Total time taken: <span id="totalTimeTaken">00:00</span>
+    </div>
+    <div class="workout-timer__next-interval">
+        Next: <span id="nextInterval">Warm-up</span>
+    </div>
+    <div class="workout-timer__controls">
+        <button id="startButton">Start</button>
+        <button id="readyButton" disabled>Ready</button>
+        <button id="stopButton" disabled>Stop</button>
+    </div>
+</div>
+<script src="{% static 'js/workout.js' %}"></script>
+{% endblock %}

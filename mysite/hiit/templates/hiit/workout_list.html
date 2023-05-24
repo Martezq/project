@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Your Workouts</h2>
+  {% for workout in workouts %}
+    <div>
+      <h3>{{ workout.name }}</h3>
+      <p>Warm Up Duration: {{ workout.warm_up_duration }} seconds</p>
+      <p>High Intensity Duration: {{ workout.high_intensity_duration }} seconds</p>
+      <p>Recovery Duration: {{ workout.recovery_duration }} seconds</p>
+      <p>Number of Intervals: {{ workout.number_of_intervals }}</p>
+      <p><a href="{% url 'hiit:workout' workout.id %}">Start</a></p>
+    </div>
+  {% empty %}
+    <p>No workouts yet. Why not <a href="{% url 'hiit:new_workout' %}">create one</a>?</p>
+  {% endfor %}
+  <p>New workout <a href="{% url 'hiit:new_workout' %}">create</a></p>
+{% endblock %}

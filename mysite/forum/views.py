@@ -31,7 +31,6 @@ def search(request):
         'topics': topics,
         'posts': posts,
     }
-    print(context)
     return render(request, 'forum/search_results.html', context)
 
 def forum_main(request):
