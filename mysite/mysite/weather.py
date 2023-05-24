@@ -20,10 +20,8 @@ class WeatherDataView(View):
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[0]
-            print(f'if{ip}')
         else:
             ip = request.META.get('REMOTE_ADDR')
-            print(f'else{ip}')
         return ip
 
     @staticmethod
@@ -31,7 +29,6 @@ class WeatherDataView(View):
         try:
             response = requests.get(f'https://ipinfo.io/{ip}/json')
             data = response.json()
-            print(data)
             # The location data is in "loc" key and the value is in 'latitude,longitude' format
             location_data = data.get('loc', '0,0').split(',')
             location = {"lat": location_data[0], "lon": location_data[1]}

@@ -17,11 +17,8 @@
             <ul class="main-nav">
                 <li><a href="{% url 'profile:profile' %}">Profile</a></li>
                 <li><a href="{% url 'forum:forum_main' %}">Forum</a></li>
-                {% if user.is_authenticated %}
                 <li><a href="{% url 'notes:note_list' %}">Notes</a></li>
-                {% else %}
-                <li><a href="{% url 'notes:note_list' %}">Notes</a></li>
-                {% endif %}
+                <li><a href="{% url 'hiit:workout_list' %}">Workouts</a></li>
             </ul>
             <ul class="auth-nav">
                 {% if user.is_authenticated %}

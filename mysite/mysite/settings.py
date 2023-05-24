@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'hiit',
     'profile.apps.ProfileConfig',
     'forum',
     'notes',
