@@ -1,5 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Welcome to the homepage!</h1>
+    <h1 class="text-center">Welcome to My Project!</h1>
+    <p class="text-center">
+        This is a showcase of my coding abilities and understanding of Django framework, containing four distinct applications: a Forum, a HIIT Workout Tracker, a Notes app, and a User Profile app. The goal of this project was to create an integrated platform to demonstrate my skills in developing full-stack applications.
+    </p>
+
+    <div class="homepage-container">
+        <div class="content-section">
+            <h2 class="text-center">Forum</h2>
+            <p class="text-center">
+                A fully-featured forum where users can create, read, update, and delete posts. This also includes the ability for users to engage in discussions by leaving comments, demonstrating CRUD operations and database relationships.
+            </p>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="text-center">HIIT Workout Timer</h2>
+            <p class="text-center">
+                A High-Intensity Interval Training (HIIT) tracker, showcasing the development of a real-time, interactive tool that allows users to set and track their workout routines.
+            </p>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="text-center">Notes</h2>
+            <p class="text-center">
+                An application that allows users to keep track of important notes and reminders. Demonstrates a CRUD model with the additional complexity of user-defined reminders.
+            </p>
+        </div>
+        <div class="content-section">
+            <h2 class="text-center">User Profile</h2>
+            <p class="text-center">
+                An app that lets users manage their profiles. Users can change profile pictures, update personal details, and manage reminders. This section showcases user authentication and user-specific data handling.
+            </p>
+        </div>
+    </div>
 {% endblock %}

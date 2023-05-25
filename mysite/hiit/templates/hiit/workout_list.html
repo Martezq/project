@@ -1,18 +1,42 @@
 {% extends "base.html" %}
-
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'hiit/css/hiit.css' %}">
+{% endblock %}
 {% block content %}
-  <h2>Your Workouts</h2>
-  {% for workout in workouts %}
-    <div>
-      <h3>{{ workout.name }}</h3>
-      <p>Warm Up Duration: {{ workout.warm_up_duration }} seconds</p>
-      <p>High Intensity Duration: {{ workout.high_intensity_duration }} seconds</p>
-      <p>Recovery Duration: {{ workout.recovery_duration }} seconds</p>
-      <p>Number of Intervals: {{ workout.number_of_intervals }}</p>
-      <p><a href="{% url 'hiit:workout' workout.id %}">Start</a></p>
+  <div class="workout-container">
+    <div class="workouts">
+      <h2 class="text-center">Your Workouts</h2>
+      {% for workout in workouts %}
+<div class="hiit-timer">
+    <h3>{{ workout.name }}</h3>
+    <p>Warm Up Duration: {{ workout.warm_up_duration }} seconds</p>
+    <p>High Intensity Duration: {{ workout.high_intensity_duration }} seconds</p>
+    <p>Recovery Duration: {{ workout.recovery_duration }} seconds</p>
+    <p>Number of Intervals: {{ workout.number_of_intervals }}</p>
+    <div class="actions">
+        <a href="{% url 'hiit:workout' workout.id %}" class="btn btn-success">Start</a>
+        <a href="{% url 'hiit:workout_edit' workout.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'hiit:workout_delete' workout.id %}" class="btn btn-danger">Delete</a>
     </div>
-  {% empty %}
-    <p>No workouts yet. Why not <a href="{% url 'hiit:new_workout' %}">create one</a>?</p>
-  {% endfor %}
-  <p>New workout <a href="{% url 'hiit:new_workout' %}">create</a></p>
+</div>
+{% empty %}
+<div class="hiit-timer"></div>
+{% endfor %}
+      <p>Create new <a href="{% url 'hiit:new_workout' %}"> Workout</a></p>
+    </div>
+    <div class="recommendations">
+      <h2>HIIT Workout Recommendations</h2>
+      <p>High-Intensity Interval Training (HIIT) workouts are flexible and can be tailored to your fitness level and goals. Here are two simple HIIT workout formats that would work well with this app:</p>
+      <ul>
+          <li><strong>Traditional HIIT:</strong> This involves a 1:1 work to rest ratio. For example, 30 seconds of high-intensity exercise followed by 30 seconds of recovery, repeated for a desired number of intervals.</li>
+          <li><strong>Short Burst HIIT:</strong> This involves very short, intense bouts of exercise, followed by longer recovery periods. For example, 15 seconds of high-intensity exercise followed by 45 seconds of recovery, repeated for a desired number of intervals.</li>
+      </ul>
+      <p>With these structures, you can easily modify the high intensity duration, recovery duration, and number of intervals to fit your fitness levels and goals.</p>
+  
+      <h3>About Our HIIT Timer</h3>
+      <p>Our HIIT timer is user-friendly and adaptable to all fitness levels. Beginners may find it particularly useful as it allows you to adjust rest times as needed. If you're finding the recovery periods in your workout too short, simply extend them in the timer settings. This way, you can focus on maintaining proper form and building your fitness at a pace that's comfortable for you. Remember, the key to HIIT is pushing yourself during the high-intensity intervals, and the timer is here to help you do that safely and effectively.</p>
+  </div>
+    
+  </div>
 {% endblock %}

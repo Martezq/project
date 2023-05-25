@@ -128,8 +128,7 @@ def post_delete(request, post_id):
     }
     return render(request, 'forum/post_delete.html', context)
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+
 
 @login_required
 def create_comment(request, post_id, parent_comment_id=None):
@@ -165,7 +164,7 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = self.get_object()
-        comments = post.comments.all().order_by('created_at')
+        comments = post.comments.filter(parent_comment=None).order_by('created_at')
         context['comments'] = comments
         context['form'] = CommentForm()
         return context

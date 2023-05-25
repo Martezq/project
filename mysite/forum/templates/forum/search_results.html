@@ -1,19 +1,22 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
+{% endblock %}
 {% block content %}
-<div class="forum-background">
+<div class="forum-background text-center">
     <h1>Search Results</h1>
     <p>Results for "{{ request.GET.q }}":</p>
 
     <h2>Topics</h2>
-    <div class="topics">
+    <div class="search">
         {% for topic in topics %}
-            <h2><a href="{% url 'forum:post_list' topic.id %}" class="post-action create">{{ topic.title}}</a></h2>
+            <h2><a href="{% url 'forum:post_list' topic.id %}">{{ topic.title}}</a></h2>
         {% endfor %}
     </div>
 
     <h2>Posts</h2>
-    <div class="posts">
+    <div class="search">
         {% for post in posts %}
              <h2><a href="{% url 'forum:post_detail' post.id %}">{{ post.title }}</a></h2>
         {% endfor %}

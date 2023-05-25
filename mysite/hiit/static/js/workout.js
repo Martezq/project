@@ -7,10 +7,13 @@ class WorkoutTimer {
         this.isOvertime = false;
         this.readyButton = document.getElementById('readyButton');
         this.stopButton = document.getElementById('stopButton');
+        this.container = document.getElementById('hiit-container');
         this.currentIntervalTimeLeft = 0; 
         this.currentIntervalTimer = null; 
         this.currentIntervalDisplay = document.getElementById('currentIntervalTimer');
         this.nextIntervalDisplay = document.getElementById('nextInterval');
+        this.currentIntervalTypeDisplay = document.getElementById('currentIntervalType');
+        this.overtimeFlagDisplay = document.getElementById('overtimeFlag');
         this.totalDurationTimer = null; 
         this.workoutStartTime = null; 
 
@@ -42,27 +45,44 @@ class WorkoutTimer {
                 this.intervalId = setTimeout(() => {
                     this.nextInterval();
                 }, remainingTime);
+                this.currentIntervalTimeLeft = Math.ceil(remainingTime / 1000); 
             } else {
                 this.isOvertime = false;
                 this.overtimeStartTime = null;
                 this.intervalId = setTimeout(() => {
                     this.nextInterval();
                 }, 10 * 1000);
+                this.currentIntervalTimeLeft = 10; 
                 console.log('Ready button pressed. Starting high-intensity in 10 seconds.');
-            }   this.currentIntervalTimeLeft = 10;
-                this.currentIntervalDisplay.innerText = this.formatTime(this.currentIntervalTimeLeft);
+            }
+    
+            this.currentIntervalDisplay.innerText = this.formatTime(this.currentIntervalTimeLeft);
         }
     }
     
+    
     nextInterval() {
+        this.overtimeFlagDisplay.style.display = 'none';
+
         this.currentIntervalIndex++;
         if (this.currentIntervalIndex >= this.workout.intervals.length) {
             this.stop();
             this.nextIntervalDisplay.innerText = 'End of workout';
             return;
         }
-    
+
         const interval = this.workout.intervals[this.currentIntervalIndex];
+        this.currentIntervalTypeDisplay.innerText = interval.type;
+        if (interval.type === 'High intensity') {
+            console.log('High intensity interval. Changing color to red.');
+            this.container.style.backgroundColor = '#FF4136'; 
+        } else if (interval.type === 'Recovery') {
+            console.log('Recovery interval. Changing color to green.');
+            this.container.style.backgroundColor = '#2ECC40'; 
+        } else if (interval.type === 'Warm-up') {
+            console.log('Warm-up interval. Changing color to yellow.');
+            this.container.style.backgroundColor = '#FFDC00'; 
+        }
 
         if (this.currentIntervalIndex + 1 < this.workout.intervals.length) {
             this.nextIntervalDisplay.innerText = this.workout.intervals[this.currentIntervalIndex + 1].type;
@@ -70,13 +90,13 @@ class WorkoutTimer {
             this.nextIntervalDisplay.innerText = 'End of workout';
         }
 
-        if (this.currentIntervalIndex === this.workout.intervals.length - 1 && interval.type === 'recovery') {
+        if (this.currentIntervalIndex === this.workout.intervals.length - 1 && interval.type === 'Recovery') {
             this.stop();
             return;
         }
 
 
-        this.isRecovery = interval.type === 'recovery';
+        this.isRecovery = interval.type === 'Recovery';
         this.readyButton.disabled = !this.isRecovery;
 
         this.currentIntervalTimeLeft = interval.duration;
@@ -105,6 +125,7 @@ class WorkoutTimer {
                         clearInterval(this.intervalId);
                         this.isOvertime = true;
                         this.overtimeStartTime = Date.now()
+                        this.overtimeFlagDisplay.style.display = 'inline';
                         console.log("Overtime started.");
                     }
                 }
@@ -114,7 +135,7 @@ class WorkoutTimer {
                 this.nextInterval();
             }, interval.duration * 1000);
         }
-        // Update interval timer every second
+
         if (this.currentIntervalTimer !== null) {
             clearInterval(this.currentIntervalTimer);
         }
@@ -126,12 +147,10 @@ class WorkoutTimer {
                     this.currentIntervalTimer = null;
                 }
             } else {
-                // In overtime, we count up from zero
                 this.currentIntervalTimeLeft = Math.floor((Date.now() - this.overtimeStartTime) / 1000);
             }
             this.currentIntervalDisplay.innerText = this.formatTime(this.currentIntervalTimeLeft);
         }, 1000);
-        // This is where you would update your UI
         console.log(`Starting ${interval.type} for ${interval.duration} seconds`);
     }
     
@@ -163,6 +182,7 @@ class WorkoutTimer {
         this.stopButton.disabled = true; 
         this.readyButton.disabled = true;
         this.nextIntervalDisplay.innerText ='Warm-up'; 
+        this.overtimeFlagDisplay.style.display = 'none';
         console.log("Workout ended");
     }    
 }
@@ -183,18 +203,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let recoveryDuration = parseInt(workoutTimer.dataset.recovery);
     let numberOfIntervals = parseInt(workoutTimer.dataset.intervals);
 
-    let timer = null; // Define the timer variable in the scope accessible to both event listeners.
+    let timer = null;  
 
     startButton.addEventListener('click', function() {
         const workoutData = {
             intervals: [
-                {type: 'warm-up', duration: warmUpDuration},
-                {type: 'high-intensity', duration: highIntensityDuration},
-                {type: 'recovery', duration: recoveryDuration},
-                // repeat high-intensity and recovery for the number of intervals
+                {type: 'Warm-up', duration: warmUpDuration},
+                {type: 'High intensity', duration: highIntensityDuration},
+                {type: 'Recovery', duration: recoveryDuration},
                 ...Array(numberOfIntervals).fill().flatMap(() => [
-                    {type: 'high-intensity', duration: highIntensityDuration},
-                    {type: 'recovery', duration: recoveryDuration},
+                    {type: 'High intensity', duration: highIntensityDuration},
+                    {type: 'Recovery', duration: recoveryDuration},
                 ]),
             ]
         };

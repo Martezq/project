@@ -9,7 +9,7 @@ class Workout(models.Model):
     warm_up_duration = models.PositiveIntegerField()
     high_intensity_duration = models.PositiveIntegerField()
     recovery_duration = models.PositiveIntegerField()
-    number_of_intervals = models.PositiveIntegerField()  # Number of high-intensity and recovery periods
+    number_of_intervals = models.PositiveIntegerField() 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
