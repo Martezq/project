@@ -8,8 +8,6 @@ class Topic(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # def latest_post(self):
-    #     return self.post_set.order_by('-created_at').first()
     def __str__(self):
         return self.title
 
@@ -29,7 +27,7 @@ class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    parent_comment = models.ForeignKey("self", null=True, related_name='replies', blank=True, on_delete=models.CASCADE)
+    parent_comment = models.ForeignKey("self", null=True, related_name='replies', blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"Comment by {self.user} on {self.post}"
