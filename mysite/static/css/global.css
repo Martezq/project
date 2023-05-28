@@ -119,4 +119,7 @@ nav a:hover {
     flex: 1 0 40%;  
     margin: 1.5rem;
     text-align: center;
-}
+ }
+.small {
+    width: 40%;
+} 

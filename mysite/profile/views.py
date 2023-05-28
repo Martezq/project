@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import UserProfile
-from .forms import UserProfileForm, ReminderSettingsFormSet
+from .forms import UserProfileForm, ReminderSettingsFormSet, CustomUserChangeForm
 from notes.models import Note, Reminder
 
 
@@ -26,10 +25,12 @@ def profile(request):
 def edit_profile(request):
     user = request.user
     if request.method == 'POST':
+        user_form = CustomUserChangeForm(request.POST, instance=user)
         profile_form = UserProfileForm(request.POST, request.FILES, instance=user.userprofile)
         reminder_settings_formset = ReminderSettingsFormSet(request.POST, prefix='reminder_settings')
 
-        if profile_form.is_valid() and reminder_settings_formset.is_valid() and reminder_settings_formset.management_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid() and reminder_settings_formset.is_valid() and reminder_settings_formset.management_form.is_valid():
+            user_form.save()
             profile_form.save()
             
 
@@ -50,6 +51,7 @@ def edit_profile(request):
             print(profile_form.errors)
             print(reminder_settings_formset.errors)
     else:
+        user_form = CustomUserChangeForm(instance=user)
         profile_form = UserProfileForm(instance=user.userprofile)
         reminder_settings_initial = []
 
@@ -59,12 +61,13 @@ def edit_profile(request):
             reminder_settings_initial.append({
                 'color': color,
                 'repeat': user.reminder_intervals.get(repeat_key, None),
-                'remind_before': user.reminder_intervals.get(remind_before_key, None),
+                'remind_before': user.reminder_intervals.get(remind_before_key, 0),
             })
 
         reminder_settings_formset = ReminderSettingsFormSet(prefix='reminder_settings', initial=reminder_settings_initial)
 
     context = {
+        'user_form': user_form,
         'profile_form': profile_form,
         'reminder_settings_formset': reminder_settings_formset,
     }

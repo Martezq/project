@@ -10,7 +10,8 @@
   <div class="form-style">
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ profile_form.as_crispy_fields }}
+      {{ profile_form | crispy }}
+      {{ user_form | crispy }}
       <h3 class="text-center">Reminder Settings</h3>
       {{ reminder_settings_formset.management_form }}
       <div class="reminder-settings">

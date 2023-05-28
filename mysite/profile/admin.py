@@ -11,7 +11,7 @@ class CustomUserAdmin(UserAdmin):
 
 class UserProfileAdmin(admin.ModelAdmin):
     model = UserProfile
-    list_display = ('user', 'email')
+    list_display = ('user',)
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)

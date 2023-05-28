@@ -187,3 +187,25 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8000',
     # add the production site url if you have one
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'errors.log'),
+        },
+        'mail_admins': {
+            'level': 'CRITICAL',
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+    },
+    'root': {
+        'handlers': ['file', 'mail_admins'],
+        'level': 'ERROR',
+    },
+}
+
+ADMINS = [('Test', 'apptest2431@gmail.com')]

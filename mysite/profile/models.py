@@ -5,6 +5,7 @@ from PIL import Image
 from django.db.models import JSONField
 import os
 import uuid
+import pytz
 
 
 def unique_filename(instance, filename):
@@ -13,15 +14,23 @@ def unique_filename(instance, filename):
     return os.path.join('profile_pics', new_filename)
 
 class CustomUser(AbstractUser):
+
+    REPEAT_CHOICES = [
+        ('none', 'Not set'),
+        ('daily', 'Daily'),
+        ('weekly', 'Weekly'),
+    ]
     email_verified = models.BooleanField(default=False)
     reminder_intervals = JSONField(default=dict)
 
 
 
 class UserProfile(models.Model):
+    TIMEZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(default='profile_pics/default.png', upload_to=unique_filename)
-    email = models.EmailField('Email', blank=True)
+    timezone = models.CharField(max_length=32, choices=TIMEZONES, default='UTC')
 
     def __str__(self):
         return f'{self.user.username} Profile'

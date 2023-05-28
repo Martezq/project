@@ -4,7 +4,7 @@
   <div class="hiit-delete text-center">
     <h2>Delete Workout</h2>
     <p>Are you sure you want to delete the workout "{{ workout.name }}"? This action cannot be undone.</p>
-    <div class="form-style">
+    <div>
         <form method="POST">
           {% csrf_token %}
           <button type="submit"  class="btn btn-danger">delete</button>
