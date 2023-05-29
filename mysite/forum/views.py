@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib import messages
 from .models import Post, Comment, Topic
 from .forms import PostForm, CommentForm
@@ -52,7 +52,7 @@ def forum_main(request):
 def post_list(request, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
     posts = Post.objects.filter(topic=topic).order_by('-created_at')
-    paginator = Paginator(posts, 20)  # Show 20 posts per page
+    paginator = Paginator(posts, 20) 
 
     page = request.GET.get('page')
     posts = paginator.get_page(page)
