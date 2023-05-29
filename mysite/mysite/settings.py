@@ -203,11 +203,23 @@ LOGGING = {
             'level': 'CRITICAL',
             'class': 'django.utils.log.AdminEmailHandler'
         },
+        'notes_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'notes.log'),
+        },
     },
     'root': {
         'handlers': ['file', 'mail_admins'],
         'level': 'ERROR',
     },
+    'loggers': {
+        'notes': {
+            'handlers': ['notes_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    }
 }
 
 ADMINS = [('Test', 'apptest2431@gmail.com')]
