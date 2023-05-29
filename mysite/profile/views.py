@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import UserProfileForm, ReminderSettingsFormSet, CustomUserChangeForm
-from notes.models import Note, Reminder
+from notes.models import Note
 
 
 @login_required
