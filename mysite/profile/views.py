@@ -47,9 +47,7 @@ def edit_profile(request):
             user.save()
 
             return redirect('profile:profile')
-        else:
-            print(profile_form.errors)
-            print(reminder_settings_formset.errors)
+        
     else:
         user_form = CustomUserChangeForm(instance=user)
         profile_form = UserProfileForm(instance=user.userprofile)
