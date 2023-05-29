@@ -53,7 +53,7 @@ class WorkoutTimer {
                     this.nextInterval();
                 }, 10 * 1000);
                 this.currentIntervalTimeLeft = 10; 
-                console.log('Ready button pressed. Starting high-intensity in 10 seconds.');
+                
             }
     
             this.currentIntervalDisplay.innerText = this.formatTime(this.currentIntervalTimeLeft);
@@ -74,13 +74,10 @@ class WorkoutTimer {
         const interval = this.workout.intervals[this.currentIntervalIndex];
         this.currentIntervalTypeDisplay.innerText = interval.type;
         if (interval.type === 'High intensity') {
-            console.log('High intensity interval. Changing color to red.');
             this.container.style.backgroundColor = '#FF4136'; 
         } else if (interval.type === 'Recovery') {
-            console.log('Recovery interval. Changing color to green.');
             this.container.style.backgroundColor = '#2ECC40'; 
         } else if (interval.type === 'Warm-up') {
-            console.log('Warm-up interval. Changing color to yellow.');
             this.container.style.backgroundColor = '#FFDC00'; 
         }
 
@@ -126,7 +123,6 @@ class WorkoutTimer {
                         this.isOvertime = true;
                         this.overtimeStartTime = Date.now()
                         this.overtimeFlagDisplay.style.display = 'inline';
-                        console.log("Overtime started.");
                     }
                 }
             }, 1000);
@@ -151,7 +147,6 @@ class WorkoutTimer {
             }
             this.currentIntervalDisplay.innerText = this.formatTime(this.currentIntervalTimeLeft);
         }, 1000);
-        console.log(`Starting ${interval.type} for ${interval.duration} seconds`);
     }
     
     
@@ -209,8 +204,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const workoutData = {
             intervals: [
                 {type: 'Warm-up', duration: warmUpDuration},
-                {type: 'High intensity', duration: highIntensityDuration},
-                {type: 'Recovery', duration: recoveryDuration},
                 ...Array(numberOfIntervals).fill().flatMap(() => [
                     {type: 'High intensity', duration: highIntensityDuration},
                     {type: 'Recovery', duration: recoveryDuration},

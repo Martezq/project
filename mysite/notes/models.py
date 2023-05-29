@@ -19,5 +19,6 @@ class Reminder(models.Model):
     note = models.OneToOneField('notes.Note', on_delete=models.CASCADE)
     remind_at = models.DateTimeField()
     email_notification = models.BooleanField(default=False)
+    email_sent = models.BooleanField(default=False)
     
 

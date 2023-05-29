@@ -74,12 +74,14 @@ def note_update(request, note_id):
                 if reminder:
                     reminder.remind_at = remind_at
                     reminder.email_notification = email_notification
+                    reminder.email_sent = False
                     reminder.save()
                 else:
                     Reminder.objects.create(
                         note=note,
                         remind_at=remind_at,
                         email_notification=email_notification,
+                        email_sent=False,
                     )
             else:
                 if reminder:

@@ -16,7 +16,7 @@
                 <p>{{ post.content }}</p>
                 <p class="post-metadata">Author: {{ post.user }} | {{ post.created_at|date:"F d, Y" }}</p>
                 <p>Comments: {{ post.comments.count }}</p>
-                {% if user.is_authenticated %}
+                {% if request.user == post.user %}
                 <div class="post-actions">
                     <a href="{% url 'forum:post_edit' post.id %}" class="post-action edit">Edit</a>
                     <a href="{% url 'forum:post_delete' post.id %}" class="post-action delete">Delete</a>

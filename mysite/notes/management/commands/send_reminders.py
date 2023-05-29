@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            reminders = Reminder.objects.filter(email_notification=True)
+            reminders = Reminder.objects.filter(email_notification=True, email_sent=False)
         except DatabaseError as e:
             logger.error(f"Database error when fetching reminders: {e}")
             return
@@ -53,15 +53,16 @@ class Command(BaseCommand):
                 recipient_list = [user.email]
 
                 send_mail(subject, message, from_email, recipient_list)
-
+                reminder.email_sent = True
+                
                 try:
                     if repeat_choice != 'none':
                         if repeat_choice == 'daily':
                             reminder.remind_at += timedelta(days=1)
                         elif repeat_choice == 'weekly':
                             reminder.remind_at += timedelta(weeks=1)
-
-                        reminder.save()
+                        reminder.email_sent = False
+                    reminder.save()
                 except DatabaseError as e:
                     logger.error(f"Database error when saving reminder: {e}")
 
