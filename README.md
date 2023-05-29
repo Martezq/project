@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 # My Project
-=======
+
 Welcome to My Project! This repository showcases my coding abilities and understanding of Django framework through four distinct applications:
 
 Forum: A fully-featured forum that supports CRUD operations and demonstrates database relationships. Users can create, read, update, and delete posts, as well as engage in discussions through comments.
