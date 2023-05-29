@@ -22,7 +22,6 @@ def note_create(request):
             note = form.save(commit=False)
             note.user = request.user
             note.save()
-            print(f'Saved note with ID {note.id}')
             
             remind_at = form.cleaned_data['remind_at']
             email_notification = form.cleaned_data['email_notification']
